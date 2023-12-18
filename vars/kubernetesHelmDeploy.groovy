@@ -10,8 +10,10 @@ def call (String dockerRegistry, String dockerImageTag, String helmChartName) {
         fi
     """
 
-    sh 'helm create helm'
-    sh "helm install ${helmChartName} helm"
-    sh 'helm upgrade --install $helmChartName helm/ --set image.repository="$dockerRegistry:$dockerImageTag" '
+    sh """
+    helm create helm
+    helm install ${helmChartName} helm
+    helm upgrade --install $helmChartName helm/ --set image.repository=$dockerRegistry:$dockerImageTag
+    """
 }
 
