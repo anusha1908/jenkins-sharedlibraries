@@ -40,7 +40,7 @@ def call (String dockerRegistry, String dockerImageTag, String kubernetesDeploym
                     kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" --record
                 else
                     echo "Creating deployment $kubernetesDeployment from manifest file"
-                    kubectl apply -f manifest.yml --record
+                    kubectl apply -f deploymentserviceCluster.yml --record
                     kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" --record
                 fi
             """
