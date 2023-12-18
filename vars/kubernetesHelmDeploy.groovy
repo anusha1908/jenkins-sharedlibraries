@@ -12,6 +12,6 @@ def call (String dockerRegistry, String dockerImageTag, String helmChartName) {
 
     sh 'helm create helm'
     sh "helm install ${helmChartName} helm"
-    sh "helm upgrade --install $helmChartName helm/ --set image.repository=$dockerRegistry:$dockerImageTag" '
+    sh 'helm upgrade --install $helmChartName helm/ --set image.repository="$dockerRegistry:$dockerImageTag" '
 }
 
