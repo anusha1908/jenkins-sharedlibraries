@@ -9,7 +9,7 @@ def call (String dockerImageTag, String helmChartName) {
             echo "Helm installed successfully."
         fi
     """
-    //sh 'helm upgrade --install $helmChartName ./helm/helm-deploy-sharedlibrary/ --set image.repository="$dockerRegistry:$dockerImageTag" '
-    sh "helm upgrade first --install $helmChartName ./helm/helm-deploy-sharedlibrary/ --set image.tag=$dockerImageTag"
+    sh 'helm upgrade --install $helmChartName ./helm/helm-deploy-sharedlibrary/ --set deployment.image="$dockerRegistry:$dockerImageTag" '
+    //sh "helm upgrade first --install $helmChartName ./helm/helm-deploy-sharedlibrary/ --set image.tag=$dockerImageTag"
 }
 
