@@ -1,4 +1,4 @@
-def call (String dockerRegistry, String dockerImageTag, String helmChartName) {
+def call (String dockerImageTag, String helmChartName) {
     sh """
         if ! command -v helm > /dev/null; then
             echo "Helm not found. Installing Helm..."
