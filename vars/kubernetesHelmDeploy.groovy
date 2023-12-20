@@ -10,5 +10,5 @@ def call (String dockerRegistry, String dockerImageTag, String helmChartName) {
         fi
     """
     
-    sh 'helm upgrade $helmChartName ./helm/helm-deploy-sharedlibrary/ --set deployment.image="$dockerRegistry:$dockerImageTag" '
+    sh 'helm upgrade $helmChartName ./helm/helm-deploy-sharedlibrary/ --set deployment.image="$dockerRegistry" '
 }
