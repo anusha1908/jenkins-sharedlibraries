@@ -1,4 +1,4 @@
-def call (String dockerRegistry, String dockerImageTag, String kubernetesDeployment, String kubernetesContainer, String awsCredID, String awsRegion, String eksClusterName) {
+def call (String dockerRegistry, String dockerImageTag, String kubernetesDeployment, String kubernetesContainer, String awsCredentialId, String awsRegion, String eksClusterName) {
     sh """
         if ! command -v aws > /dev/null; then
             echo "AWS CLI not found. Installing AWS CLI..."
@@ -24,7 +24,7 @@ def call (String dockerRegistry, String dockerImageTag, String kubernetesDeploym
     """
 
     withCredentials([usernamePassword(
-        credentialsId: "$awsCredID",
+        credentialsId: "$awsCredentialId",
         usernameVariable: "awsAccessKey",
         passwordVariable: "awsSecretKey"
     )]) {
