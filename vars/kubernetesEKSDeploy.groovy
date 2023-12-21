@@ -23,7 +23,7 @@ def call (String dockerRegistry, String dockerImageTag, String kubernetesDeploym
         fi
     """
 
-    withCredentials([awsAccessKeys(
+    withCredentials([awsCredentials(
         credentialsId: "$awsCredID",
         accessKeyVariable: "awsAccessKey",
         secretKeyVariable: "awsSecretKey"
