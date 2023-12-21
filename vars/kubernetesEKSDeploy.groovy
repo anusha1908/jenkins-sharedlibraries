@@ -23,10 +23,10 @@ def call (String dockerRegistry, String dockerImageTag, String kubernetesDeploym
         fi
     """
 
-      withCredentials([usernamePassword(
+       withCredentials([AWSCredentials(
         credentialsId: "$awsCredID",
-        AccesskeyVariable: "awsAccessKey",
-        secretkeyVariable: "awsSecretKey"
+        usernameVariable: "awsAccessKey",
+        passwordVariable: "awsSecretKey"
     )]) {
             sh """
                 aws configure set aws_access_key_id $awsAccessKey
