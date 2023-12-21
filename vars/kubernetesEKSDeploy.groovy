@@ -38,11 +38,11 @@ def call (String dockerRegistry, String dockerImageTag, String kubernetesDeploym
 
                 kubectl get deploy $kubernetesDeployment || true; if [ \$? -ne 0 ]; then
                     echo "Updating image of deployment $kubernetesDeployment"
-                    kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" --record
+                    kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" 
                 else
                     echo "Creating deployment $kubernetesDeployment from manifest file"
                     kubectl apply -f manifest.yml --record
-                    kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" --record
+                    kubectl set image deploy $kubernetesDeployment $kubernetesContainer="$dockerRegistry:$dockerImageTag" 
                 fi
             """
         }
