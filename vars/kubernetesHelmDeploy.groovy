@@ -9,6 +9,6 @@ def call (String dockerRegistry, String dockerImageTag, String helmChartName,Str
             echo "Helm installed successfully."
         fi
     """
-    aws eks --region $awsRegion update-kubeconfig --name $eksClusterName
+    
     sh 'helm upgrade --install $helmChartName helm/ --set image.repository="$dockerRegistry:$dockerImageTag" '
 }
