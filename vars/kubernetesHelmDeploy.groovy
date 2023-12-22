@@ -1,19 +1,14 @@
-def call (String dockerRegistry, String dockerImageTag, String helmChartName, String awsRegion, String eksClusterName ) {
+def call (String dockerRegistry, String dockerImageTag, String helmChartName,String awsRegion, String eksClusterName ) {
     sh """
         if ! command -v helm > /dev/null; then
             echo "Helm not found. Installing Helm..."
-            sudo curl -fsSL -S -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-            sudo chmod 700 get_helm.sh
-            sudo ./get_helm.sh 
-            sudo rm -f get_helm.sh
+            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+            chmod 700 get_helm.sh
+            ./get_helm.sh
+            rm -f get_helm.sh
             echo "Helm installed successfully."
         fi
     """
-    
-    sh  """
-     aws eks --region $awsRegion update-kubeconfig --name $eksClusterName
-    helm upgrade --install $helmChartName ./helm/helm-deploy-sharedlibrary/ -n ingress-nginx --set image.repository="$dockerRegistry:$dockerImageTag" 
-    
-"""
+    aws eks --region $awsRegion update-kubeconfig --name $eksClusterName
+    sh 'helm upgrade --install $helmChartName helm/ --set image.repository="$dockerRegistry:$dockerImageTag" '
 }
-
